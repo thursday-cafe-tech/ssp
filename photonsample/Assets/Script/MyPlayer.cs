@@ -17,6 +17,12 @@ public class MyPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("PlayerCount: " + PhotonNetwork.CurrentRoom.PlayerCount);
+        Debug.Log("CurrntRoom: " + PhotonNetwork.CurrentRoom);
+        Debug.Log("PlayerListLength: " + PhotonNetwork.PlayerList.Length);
+        foreach (Player p in PhotonNetwork.PlayerList){
+            Debug.Log("Player: " + p);
+            Debug.Log("ActorNumber: " + p.ActorNumber);
+        }
     }
 }

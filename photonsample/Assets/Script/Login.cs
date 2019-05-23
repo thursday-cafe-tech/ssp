@@ -21,7 +21,7 @@ public class Login : MonoBehaviourPunCallbacks
     
 
     public void OnLoginButtonClicked() {
-        string playerName="hhhhhhhhhhh";
+        string playerName="ishiyama";
         PhotonNetwork.LocalPlayer.NickName = playerName;
         Debug.Log("おしている");
         PhotonNetwork.ConnectUsingSettings();          
@@ -30,15 +30,18 @@ public class Login : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("つながっている");
-        PhotonNetwork.JoinRandomRoom();
+
+        PhotonNetwork.CreateRoom("5000");
+        PhotonNetwork.JoinRoom("5000");
+
+        //PhotonNetwork.JoinRandomRoom();
         //this.SetActivePanel(SelectionPanel.name)
     }
     
     public override void OnJoinedRoom()
     {
-
-        PhotonNetwork.CurrentRoom.IsOpen = false;
-        PhotonNetwork.CurrentRoom.IsVisible = false;
+        PhotonNetwork.CurrentRoom.IsOpen = true;
+        PhotonNetwork.CurrentRoom.IsVisible = true;
         Debug.Log("ジョインルームしている");
         //PhotonNetwork.LoadLevel("DemoAsteroids-GameScene");
         PhotonNetwork.LoadLevel("SSP-48");
@@ -78,6 +81,7 @@ public class Login : MonoBehaviourPunCallbacks
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
+        Debug.Log("failed");
         string roomName = "Room " + Random.Range(1000, 10000);
 
         RoomOptions options = new RoomOptions {MaxPlayers = 8};
