@@ -19,7 +19,6 @@ public class MyPlayer : Photon.Pun.MonoBehaviourPun
     void Start()
     {
         this.gameObject.GetComponent<Text>().text = PhotonNetwork.LocalPlayer.ActorNumber.ToString();
-        this.gameObject.AddComponent<PhotonView>();
         this.photonView = this.gameObject.GetComponent<PhotonView>();
     }
 
@@ -41,28 +40,38 @@ public class MyPlayer : Photon.Pun.MonoBehaviourPun
         }
 
         if(this.turnManager.Turn == 7 && this.judge) {
-            photonView.RPC("winLose", RpcTarget.Others, this.hand);
-            this.judge = false;
+            if(photonView.IsMine) {
+                photonView.RPC("winLose", RpcTarget.All, this.hand);
+                this.judge = false;
+            }
+            
         }
     }
 
+    [PunRPC]
     void winLose(string othersHand) {
         if(this.hand == "rock" && othersHand == "paper") {
+            Debug.Log("負け");
             this.gameObject.GetComponent<Text>().text = "まけ";
         }
         if(this.hand == "scissor" && othersHand == "rock") {
+            Debug.Log("負け");
             this.gameObject.GetComponent<Text>().text = "まけ";
         }
         if(this.hand == "paper" && othersHand == "scissor") {
+            Debug.Log("負け");
             this.gameObject.GetComponent<Text>().text = "まけ";
         }
         if(this.hand == "rock" && othersHand == "scissor") {
+            Debug.Log("勝ち");
             this.gameObject.GetComponent<Text>().text = "かち";
         }
         if(this.hand == "scissor" && othersHand == "paper") {
+            Debug.Log("勝ち");
             this.gameObject.GetComponent<Text>().text = "かち";
         }
         if(this.hand == "paper" && othersHand == "rock") {
+            Debug.Log("勝ち");
             this.gameObject.GetComponent<Text>().text = "かち";
         }
     }
