@@ -6,10 +6,15 @@ using Photon.Realtime;
 
 public class Login : MonoBehaviourPunCallbacks
 {
+
+    private bool isConnectedToMaster = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        string playerName="ishiyama";
+        PhotonNetwork.LocalPlayer.NickName = playerName;
+        Debug.Log("おしている");
+        PhotonNetwork.ConnectUsingSettings();
     }
 
     // Update is called once per frame
@@ -27,12 +32,24 @@ public class Login : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();          
     }
 
+    public void OnCreateRoomButtonClicked() {
+        if(this.isConnectedToMaster) {
+            PhotonNetwork.CreateRoom("5000");
+        }
+    }
+
+    public void OnJoinRoomButtonClicked() {
+        if(this.isConnectedToMaster) {
+            PhotonNetwork.JoinRoom("5000");
+        }
+    }
+
     public override void OnConnectedToMaster()
     {
         Debug.Log("つながっている");
-        PhotonNetwork.JoinRoom("5000");
-        PhotonNetwork.CreateRoom("5000");
-        
+        // PhotonNetwork.JoinRoom("5000");
+        // PhotonNetwork.CreateRoom("5000");
+        this.isConnectedToMaster = true;
         
         //PhotonNetwork.JoinRandomRoom();
         //this.SetActivePanel(SelectionPanel.name)

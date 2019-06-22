@@ -40,7 +40,7 @@ public class MyPlayer : Photon.Pun.MonoBehaviourPun
             this.gameObject.GetComponent<Text>().text = "";
         }
 
-        if(this.turnManager.Turn == 3 && this.judge) {
+        if(this.turnManager.Turn == 7 && this.judge) {
             photonView.RPC("winLose", RpcTarget.Others, this.hand);
             this.judge = false;
         }

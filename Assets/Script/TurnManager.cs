@@ -21,7 +21,7 @@ public class TurnManager : MonoBehaviourPun, IPunTurnManagerCallbacks
     {
         this.punTurnManager = this.gameObject.AddComponent<PunTurnManager>();
         this.punTurnManager.TurnManagerListener = this;
-        this.punTurnManager.TurnDuration = 10.0f;//ターンは5秒にする
+        this.punTurnManager.TurnDuration = 5.0f;//ターンは5秒にする
         if (PhotonNetwork.IsMasterClient)
         {
             this.punTurnManager.BeginTurn();//turnmanagerに新しいターンを始めさせる
