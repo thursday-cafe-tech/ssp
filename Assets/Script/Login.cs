@@ -30,8 +30,9 @@ public class Login : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("つながっている");
-        PhotonNetwork.CreateRoom("5000");
         PhotonNetwork.JoinRoom("5000");
+        PhotonNetwork.CreateRoom("5000");
+        
         
         //PhotonNetwork.JoinRandomRoom();
         //this.SetActivePanel(SelectionPanel.name)

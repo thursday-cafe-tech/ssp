@@ -13,14 +13,15 @@ public class TurnManager : MonoBehaviourPun, IPunTurnManagerCallbacks
     public Text TurnText;
     // Start is called before the first frame update
 
-    public int Turn{
-        get {return this.punTurnManager.Turn;}
+    public int Turn
+    {
+        get { return this.punTurnManager.Turn; }
     }
     void Awake()
     {
         this.punTurnManager = this.gameObject.AddComponent<PunTurnManager>();
         this.punTurnManager.TurnManagerListener = this;
-        this.punTurnManager.TurnDuration = 5f;//ターンは5秒にする
+        this.punTurnManager.TurnDuration = 10.0f;//ターンは5秒にする
         if (PhotonNetwork.IsMasterClient)
         {
             this.punTurnManager.BeginTurn();//turnmanagerに新しいターンを始めさせる
