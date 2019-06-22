@@ -40,11 +40,8 @@ public class MyPlayer : Photon.Pun.MonoBehaviourPun
         }
 
         if(this.turnManager.Turn == 7 && this.judge) {
-            if(photonView.IsMine) {
-                photonView.RPC("winLose", RpcTarget.All, this.hand);
-                this.judge = false;
-            }
-            
+            photonView.RPC("winLose", RpcTarget.All, this.hand);
+            this.judge = false;
         }
     }
 
